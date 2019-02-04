@@ -1,0 +1,17 @@
+---
+ - hosts: tag_Name_Ganeshkona
+   become: yes
+   become_method: "sudo"
+   become_user: root
+   gather_facts: false
+   pre_tasks:
+   - name: Install python2 for Ansible
+     raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+     register: output
+     changed_when: output.stdout != ""
+   tasks: 
+   - name: To install apache2 package
+     apt: name=apache2 state=present
+
+   - name: To start the service
+     service: name=apache2 state=started
