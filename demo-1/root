@@ -1,0 +1,5 @@
+#!/bin/bash
+cd /root/demo-1
+terraform apply -auto-approve
+cd /root/playbook
+ansible-playbook -i /etc/ansible/ec2.py -u ubuntu --private-key /root/kona1729.pem apache.yml
